@@ -1,0 +1,23 @@
+a {
+    margin-top: 3.6rem;
+    width: 20rem;
+    letter-spacing: 0.4px;
+    font-family: Lato;
+    font-size: $small-font*2.2;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    text-align: left;
+    color: $light-blue;
+    text-decoration: none;
+    &:hover {
+        color: darken($light-blue, 7%);
+    }
+    span {
+        padding-left: 1rem;
+    }
+    img {
+        padding-left: 0.1rem;
+    }
+}

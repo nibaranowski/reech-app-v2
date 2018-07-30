@@ -1,0 +1,35 @@
+.testimonials {
+    background: none;
+    margin-bottom: 8rem;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        margin-bottom: 4rem;
+    }
+}
+
+.testimonials__title {
+    padding-left: $s-size;
+    width: 100%;
+    margin-bottom: 3.5rem;
+    h1 {
+        @extend .t1;
+        margin: 0;
+    }
+}
+
+.testimonials__content{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: $m-size*1.1 0;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        padding: $s-size*1.15 0;
+        flex-direction: column;
+    }
+}
+
+.testimonials__title {
+    @extend .t1;
+    margin-bottom: 6rem;
+}

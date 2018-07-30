@@ -1,0 +1,17 @@
+
+.mainB__content__image {
+    position: absolute;
+    //border: 1px red solid;
+    width: 100%;
+    z-index: -1;
+    img {
+        width: 100%;
+        heigh: auto;
+    }
+
+    img {
+        @media (max-width: $desktop-breakpoint) { //here in mobile
+            display: none;
+        }
+    }
+}

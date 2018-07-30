@@ -1,0 +1,108 @@
+.header {
+    background: none;
+    margin-bottom: 0.3rem;
+    z-index: 1;
+    position: relative;
+}
+
+.header__content {
+    //border: 1px blue solid;
+    width: 100%;
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: $m-size;
+    padding-right: $m-size*0.5;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        display: flex;
+        flex-direction: column;
+        padding: $m-size;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}
+
+.header__title-content {
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        //padding: $s-size*1.15 0;
+    }
+}
+
+.header__title-content__title {
+  font-family: Nunito;
+  //border: 1px black solid;
+  font-size: $large-font*0.98;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.05rem;
+  color: black;
+  text-decoration: none;
+  width: 100%;
+  h1 {
+      font-weight: bold;
+      margin: 0;
+  }
+  @media (max-width: $desktop-breakpoint) { //here in mobile
+      //padding: $s-size*1.15 0;
+  }
+}
+
+.header__title-content__menu {
+    float: right !important;
+    //border: 1px black solid;
+}
+
+// .header__subtitle-content {
+//     padding-bottom: 2rem;
+//     width: 54.3rem;
+//     align-items: flex-end;
+//     display: flex;
+//     justify-content: space-around;
+//     padding-bottom: $m-size*1.3;
+//     padding-top: $m-size;
+//
+//
+//     @media (max-width: $desktop-breakpoint) {
+//
+//         width: 100%;
+//         padding-left: 0;
+//         justify-content: space-between;
+//     }
+// }
+//
+//
+//
+// .header__subtitle {
+//     font-family: Lato;
+//     font-size: $medium-font*1.3;
+//     font-style: normal;
+//     font-stretch: normal;
+//     letter-spacing: normal;
+//     text-align: center;
+//     color: $main-blue;
+//     text-decoration: none;
+//     h2 {
+//       font-weight: 400;
+//       margin: 0;
+//     }
+//     &:hover {
+//       color: darken($main-blue, 7%);
+//     }
+//     @media (max-width: $desktop-breakpoint) {
+//         width: 12%;
+//         text-align: left;
+//         font-family: Lato;
+//         font-size: $medium-font*0.9;
+//   }
+// }
+//
+// .header__subtitle--underline {
+//     @extend .header__subtitle;
+//     h2 {
+//         //text-decoration: underline;
+//         font-weight: 600;
+//     }
+// }

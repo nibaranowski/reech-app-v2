@@ -1,0 +1,57 @@
+.track {
+    background: none;
+    margin-bottom: 1.4rem;
+    @media (max-width: $desktop-breakpoint) {
+        margin-bottom: 4rem;
+    }
+}
+
+.track__content {
+    margin-left: 1.8rem;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: $m-size;
+    padding-top: $m-size;
+    padding-left: 0;
+    padding-right: $s-size;
+    @media (max-width: $desktop-breakpoint) {
+        padding: 0;
+        margin: 0;
+        //border: red 1px solid;
+        width: 100%;
+        padding-right: 0;
+        justify-content: space-around;
+    }
+
+}
+
+.text-box {
+    margin-top: 18.5rem;
+    padding-left: 0rem;
+}
+
+.text-box__title {
+    @extend .t2;
+    width: 365px;
+    height: 82px;
+
+}
+
+.text-box__text {
+    @extend .lp;
+    width: 398px;
+    height: 104px;
+    margin-bottom: 2.2rem;
+}
+
+.image-box {
+    margin-top: 10rem;
+    margin-right: 1rem;
+    img {
+        opacity: 1;
+        width: 58.2rem;
+    }
+}

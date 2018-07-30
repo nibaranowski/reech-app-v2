@@ -1,0 +1,229 @@
+.lt1 { //large-title-1
+    font-family: $main-font;
+    font-size: 4.96rem;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: $main-blue;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        font-size: 4.96rem*$mobile-factor;
+    }
+}
+
+.lt2 { //large-title-2
+    margin-top: -2.1rem;
+
+    font-family: $main-font;
+    font-size: 4.96rem;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: justify;
+    color: $grey;
+    line-height: 1.5;
+    font-weight: 100 !important;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        font-size: 4.96rem*$mobile-factor;
+        line-height: 1.5*$mobile-factor;
+    }
+}
+
+
+.t1 { //title-1
+    font-family: Nunito;
+    font-size: 5rem;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        font-size: 3.2rem*$mobile-factor;
+    }
+}
+
+.t2 { //title-2
+    margin-top: -1.2rem;
+
+    font-family: Nunito;
+    font-size: 40px;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.03;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        line-height: 1.5*$mobile-factor;
+        font-size: 3.2rem*$mobile-factor;
+    }
+}
+
+.t3 { //title-3
+
+    font-family: Nunito;
+    font-size: 2.5rem;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.64;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        line-height: 1.5*$mobile-factor;
+        font-size: 2.4rem*$mobile-factor;
+    }
+}
+
+.t4 { //title-3
+
+    font-family: Nunito;
+    font-size: 2.0rem;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2.43;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        line-height: 1.5*$mobile-factor;
+        font-size: 2.4rem*$mobile-factor;
+    }
+}
+
+.t4-mod {
+    font-family: Nunito;
+    font-size: 2.4rem;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.27;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+}
+
+.tp { //title-p
+    font-family: $main-font;
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2;
+    letter-spacing: 0.05rem;
+    text-align: justify;
+    color: $main-blue;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        line-height: 2*$mobile-factor;
+        font-size: 1.6rem*$mobile-factor;
+    }
+}
+
+.tp--mod { //title-p
+    @extend .tp;
+    //color: $off-black;
+    //font-weight: 500;
+}
+
+.stp { //subtitle-p
+    font-family: $main-font;
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2;
+    letter-spacing: 0.05rem;
+    text-align: justify;
+    color: $grey;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        line-height: 2*$mobile-factor;
+        font-size: 1.2rem*$mobile-factor;
+    }
+}
+
+.p { //p
+    font-family: Nunito;
+    font-size: 15px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        line-height: 1.8*$mobile-factor;
+        font-size: 1.6rem*$mobile-factor;
+    }
+}
+
+.pReg { //p
+    @extend .p;
+    font-weight: 400;
+}
+
+.tlp { //title-large-p
+    font-family: $main-font;
+    font-size: 3.36rem;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: $off-black;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        font-size: 3.36rem*$mobile-factor;
+    }
+}
+
+.lp { //large-p
+    margin-top: -2rem;
+
+    font-family: Nunito;
+    font-size: 17.5px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.49;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        line-height: 1.6*$mobile-factor;
+        font-size: 2.16rem*$mobile-factor;
+    }
+}
+
+.sp { //small-p
+    font-family: Nunito;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    @media (max-width: $desktop-breakpoint) { //here in mobile
+        line-height: 1.5*$mobile-factor;
+        font-size: 1.44rem*$mobile-factor;
+    }
+}
+
+.plink {
+    font-family: Nunito;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.63;
+    letter-spacing: normal;
+    text-align: left;
+    color: $main-green;
+}
