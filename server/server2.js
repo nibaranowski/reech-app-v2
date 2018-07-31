@@ -7,7 +7,7 @@
 // const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
-// const {ObjectID} = require('mongodb');
+const {ObjectID} = require('mongodb');
 
 
 var mongoose = require('./db/mongoose');
@@ -43,6 +43,32 @@ app.post('/leads', (req, res) => {
         res.send(doc);
     }, (e) => {
         res.status(400).send(e);
+    })
+});
+
+app.get('/leads', (req, res) => {
+    Lead.find().then((todos) => {
+        res.send({todos})
+    }, (e) => {
+        res.status(400).send(e);
+    });
+});
+
+app.get('/leads/:id', (req, res) => {
+    var id = req.params.id;
+
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).send();
+    }
+
+    Lead.findById(id).then((lead) => {
+        if (!lead) {
+            return res.status(404).send();
+        }
+
+        res.send({lead});
+    }).catch((e) => {
+        res.status(400).send();
     })
 });
 
