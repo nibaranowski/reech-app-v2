@@ -4,7 +4,7 @@ const validator = require('validator');
 const _ = require('lodash');
 const bcrypt = require('bcryptjs');
 
-var UserSchema = new mongoose.Schema({
+var UserSchema = new mongoose.Schema({ //we need to place in schema in order to apply instance and/or model methods
     email: {
         type: String,
         required: true,
@@ -33,9 +33,13 @@ var UserSchema = new mongoose.Schema({
     }],
     _plan: { //underscore because object ID
         type: mongoose.Schema.Types.ObjectId,
-        required: true
+        required: false
     }
 });
+
+
+// UserSchema.methods => instance method
+// UserSchema.statics => model method
 
 UserSchema.methods.toJSON = function () {
     var user = this;
@@ -45,9 +49,9 @@ UserSchema.methods.toJSON = function () {
 };
 
 UserSchema.methods.generateAuthToken = function () {
-    var user = this; //instance method (call instance)
+    var user = this; //this is the instance (not the model)
     var access = 'auth';
-    var token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();
+    var token = jwt.sign({_id: user._id.toHexString(), access}, 'abc123').toString();
 
     user.tokens = user.tokens.concat([{access, token}]);
 
@@ -57,7 +61,7 @@ UserSchema.methods.generateAuthToken = function () {
 };
 
 UserSchema.methods.removeToken = function (token) {
-    var user = this; //instance; not model
+    var user = this;
 
     return user.update({
         $pull: {
