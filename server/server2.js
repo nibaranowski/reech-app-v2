@@ -4,7 +4,7 @@
 //require('./config/config');
 
 // const path = require('path');
-// const _ = require('lodash');
+const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
@@ -36,7 +36,8 @@ app.use(bodyParser.json()); //allow to send json to express app
 
 app.post('/leads', (req, res) => {
     var lead = new Lead({
-        firstName: req.body.firstName
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
     });
 
     lead.save().then((doc) => {
@@ -62,6 +63,51 @@ app.get('/leads/:id', (req, res) => {
     }
 
     Lead.findById(id).then((lead) => {
+        if (!lead) {
+            return res.status(404).send();
+        }
+
+        res.send({lead});
+    }).catch((e) => {
+        res.status(400).send();
+    })
+});
+
+app.delete('/leads/:id', async (req, res) => {
+    var id = req.params.id;
+
+    if(!ObjectID.isValid(id)) {
+        return res.status(404).send();
+    }
+
+    Lead.findByIdAndRemove(id).then((lead) => {
+        if (!lead) {
+            return res.status(404).send();
+        }
+
+        res.send(lead);
+    }).catch((e) => {
+        res.status(400).send();
+    });
+});
+
+app.patch('/leads/:id', (req, res) => {
+    console.log('hi')
+    var id = req.params.id;
+    var body = _.pick(req.body, ['firstName', 'lastName']);
+
+    if(!ObjectID.isValid(id)) {
+        return res.status(404).send();
+    }
+
+    // if(_.isBoolean(body.completed) && body.completed) {
+    //     body.compledtedAt = new Date().getTime();
+    // } else {
+    //     body.completed = false;
+    //     body.compledtedAt = null;
+    // }
+
+    Lead.findByIdAndUpdate(id, {$set: body}, {new: true}).then((lead) => {
         if (!lead) {
             return res.status(404).send();
         }
