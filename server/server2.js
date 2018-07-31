@@ -47,8 +47,8 @@ app.post('/leads', (req, res) => {
 });
 
 app.get('/leads', (req, res) => {
-    Lead.find().then((todos) => {
-        res.send({todos})
+    Lead.find().then((leads) => {
+        res.send({leads})
     }, (e) => {
         res.status(400).send(e);
     });
