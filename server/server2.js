@@ -93,7 +93,6 @@ app.delete('/leads/:id', async (req, res) => {
 });
 
 app.patch('/leads/:id', (req, res) => {
-    console.log('hi')
     var id = req.params.id;
     var body = _.pick(req.body, ['firstName', 'lastName']);
 
@@ -123,17 +122,16 @@ app.patch('/leads/:id', (req, res) => {
 //instance method = custom method applied to specific instances
 
 app.post('/users', (req, res) => {
-    var body = _.pick(req.body, ['email', 'password']);
-    var user = new User(body);
+  var body = _.pick(req.body, ['email', 'password']);
+  var user = new User(body);
 
-    user.save().then(() => {
-        return user.generateAuthToken();
-        //res.send(user);
-    }).then((token) => {
-        res.header('x-auth', token).send(user);
-    }).catch((e) => {
-        res.status(400).send(e);
-    })
+  user.save().then(() => {
+    return user.generateAuthToken();
+  }).then((token) => {
+    res.header('x-auth', token).send(user);
+  }).catch((e) => {
+    res.status(400).send(e);
+  })
 });
 
 app.get('/users/me', authenticate, (req, res) => {
@@ -141,24 +139,25 @@ app.get('/users/me', authenticate, (req, res) => {
 });
 
 
-app.post('/users/login', async (req, res) => {
-    try {
-        const body = _.pick(req.body, ['email', 'password']);
-        const user = await User.findByCredentials(body.email, body.password);
-        const token = await user.generateAuthToken();
-        res.header('x-auth', token).send(user);
-    } catch (e) {
-        res.status(400).send();
-    };
+app.post('/users/login', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password']);
 
-
-    User.findByCredentials(body.email, body.password).then((user) => {
-        return user.generateAuthToken().then((token) => {
-            res.header('x-auth', token).send(user);
-        });
+  User.findByCredentials(body.email, body.password).then((user) => {
+    return user.generateAuthToken().then((token) => {
+      res.header('x-auth', token).send(user);
     });
-})
+  }).catch((e) => {
+    res.status(400).send();
+  });
+});
 
+app.delete('/users/me/token', authenticate, (req, res) => {
+  req.user.removeToken(req.token).then(() => {
+    res.status(200).send();
+  }, () => {
+    res.status(400).send();
+  });
+});
 
 app.listen(port, () => {
     console.log(`Started on port ${port}`);
