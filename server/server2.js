@@ -35,106 +35,93 @@ app.use(bodyParser.json()); //allow to send json to express app
 //   console.log(req.body);
 // });
 
-app.post('/leads', authenticate, (req, res) => {
-    var lead = new Lead({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName//,
-        //_creator: req.user._id //this is the info to link creation of object with user id
-    });
-
-    lead.save().then((doc) => {
-        res.send(doc);
-    }, (e) => {
+app.post('/leads', authenticate, async (req, res) => {
+    try {
+        const lead = new Lead({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName//,
+            //_creator: req.user._id //this is the info to link creation of object with user id
+        });
+        await lead.save();
+        res.send(lead)
+    } catch (e) {
         res.status(400).send(e);
-    })
+    };
 });
 
-app.get('/leads', authenticate, (req, res) => {
-    Lead.find(
-        //{_creator: req.user._id} //only return lead created by user
-    ).then((leads) => {
-        res.send({leads})
-    }, (e) => {
-        res.status(400).send(e);
-    });
+app.get('/users/me', authenticate, (req, res) => {
+    res.send(req.user);
 });
 
-app.get('/leads/:id', (req, res) => {
-    var id = req.params.id;
+app.get('/leads', authenticate, async (req, res) => {
+    try {
+        const leads = await Lead.find(
+            //{_creator: req.user._id} //only return lead created by user
+        );
+        res.send({leads});
+    } catch (e) {
+        res.status(400).send(e);
+    };
+});
 
-    if (!ObjectID.isValid(id)) {
-        return res.status(404).send();
-    }
-
-    Lead.findById(id).then((lead) => {
-        if (!lead) {
+app.get('/leads/:id', authenticate, async (req, res) => {
+    try {
+        const id = req.params.id;
+        if (!ObjectID.isValid(id)) {
             return res.status(404).send();
         }
-
+        const lead = await Lead.findById(id);
         res.send({lead});
-    }).catch((e) => {
+    } catch (e) {
         res.status(400).send();
-    })
+    }
 });
 
-app.delete('/leads/:id', async (req, res) => {
-    var id = req.params.id;
+app.delete('/leads/:id', authenticate, async (req, res) => {
+    try {
+        const id = req.params.id;
 
-    if(!ObjectID.isValid(id)) {
-        return res.status(404).send();
-    }
-
-    Lead.findByIdAndRemove(id).then((lead) => {
-        if (!lead) {
+        if(!ObjectID.isValid(id)) {
             return res.status(404).send();
         }
 
+        const lead = await Lead.findByIdAndRemove(id);
+        if (!lead) {
+            return res.status(404).send();
+        }
         res.send(lead);
-    }).catch((e) => {
+    } catch (e) {
         res.status(400).send();
-    });
+    }
 });
 
-app.patch('/leads/:id', (req, res) => {
-    var id = req.params.id;
-    var body = _.pick(req.body, ['firstName', 'lastName']);
-
-    if(!ObjectID.isValid(id)) {
-        return res.status(404).send();
-    }
-
-    // if(_.isBoolean(body.completed) && body.completed) {
-    //     body.compledtedAt = new Date().getTime();
-    // } else {
-    //     body.completed = false;
-    //     body.compledtedAt = null;
-    // }
-
-    Lead.findByIdAndUpdate(id, {$set: body}, {new: true}).then((lead) => {
-        if (!lead) {
+app.patch('/leads/:id', authenticate, async (req, res) => {
+    try {
+        const id = req.params.id;
+        const body = _.pick(req.body, ['firstName', 'lastName']);
+        if(!ObjectID.isValid(id)) {
             return res.status(404).send();
         }
-
-        res.send({lead});
-    }).catch((e) => {
+        lead = await Lead.findByIdAndUpdate(id, {$set: body}, {new: true});
+        res.send({lead})
+    } catch (e) {
         res.status(400).send();
-    })
+    }
 });
 
 //mode method = custom model methods
 //instance method = custom method applied to specific instances
 
-app.post('/users', (req, res) => {
-  var body = _.pick(req.body, ['email', 'password']);
-  var user = new User(body);
-
-  user.save().then(() => {
-    return user.generateAuthToken();
-  }).then((token) => {
-    res.header('x-auth', token).send(user);
-  }).catch((e) => {
-    res.status(400).send(e);
-  })
+app.post('/users', async (req, res) => {
+    try {
+        const body = _.pick(req.body, ['email', 'password']);
+        const user = new User(body);
+        await user.save();
+        const token = await user.generateAuthToken();
+        res.header('x-auth', token).send(user);
+    } catch (e) {
+        res.status(400).send(e);
+    }
 });
 
 app.get('/users/me', authenticate, (req, res) => {
@@ -142,24 +129,24 @@ app.get('/users/me', authenticate, (req, res) => {
 });
 
 
-app.post('/users/login', (req, res) => {
-  var body = _.pick(req.body, ['email', 'password']);
-
-  User.findByCredentials(body.email, body.password).then((user) => {
-    return user.generateAuthToken().then((token) => {
+app.post('/users/login', async (req, res) => {
+    try {
+      const body = _.pick(req.body, ['email', 'password']);
+      const user = await User.findByCredentials(body.email, body.password);
+      const token = await user.generateAuthToken();
       res.header('x-auth', token).send(user);
-    });
-  }).catch((e) => {
-    res.status(400).send();
-  });
+  } catch (e) {
+      res.status(400).send();
+  }
 });
 
-app.delete('/users/me/token', authenticate, (req, res) => {
-  req.user.removeToken(req.token).then(() => {
-    res.status(200).send();
-  }, () => {
-    res.status(400).send();
-  });
+app.delete('/users/me/token', authenticate, async (req, res) => {
+    try {
+        await req.user.removeToken(req.token);
+        res.status(200).send();
+    } catch (e) {
+        res.status(400).send();
+    }
 });
 
 app.listen(port, () => {
