@@ -5,7 +5,7 @@ var List = mongoose.model('List', {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    _user: { //underscore because object ID
+    _creator: { //underscore because object ID
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },

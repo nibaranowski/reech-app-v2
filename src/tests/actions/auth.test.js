@@ -1,7 +1,7 @@
 import { login, logout } from '../../actions/auth';
 
 test('should generate login action object', () => {
-  const uid = 'abc123';
+  const uid = process.env.JWT_SECRET;
   const action = login(uid);
   expect(action).toEqual({
     type: 'LOGIN',

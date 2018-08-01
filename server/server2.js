@@ -1,7 +1,7 @@
 
 
 
-//require('./config/config');
+require('./config/config');
 
 // const path = require('path');
 const _ = require('lodash');
@@ -35,10 +35,11 @@ app.use(bodyParser.json()); //allow to send json to express app
 //   console.log(req.body);
 // });
 
-app.post('/leads', (req, res) => {
+app.post('/leads', authenticate, (req, res) => {
     var lead = new Lead({
         firstName: req.body.firstName,
-        lastName: req.body.lastName
+        lastName: req.body.lastName//,
+        //_creator: req.user._id //this is the info to link creation of object with user id
     });
 
     lead.save().then((doc) => {
@@ -48,8 +49,10 @@ app.post('/leads', (req, res) => {
     })
 });
 
-app.get('/leads', (req, res) => {
-    Lead.find().then((leads) => {
+app.get('/leads', authenticate, (req, res) => {
+    Lead.find(
+        //{_creator: req.user._id} //only return lead created by user
+    ).then((leads) => {
         res.send({leads})
     }, (e) => {
         res.status(400).send(e);
