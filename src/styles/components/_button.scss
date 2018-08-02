@@ -39,6 +39,7 @@
     text-decoration: none;
     line-height: 1rem;
     transition: background .3s ease;
+    color: red;
     span {
         width: 4.0rem;
         height: 1.6rem;
@@ -94,6 +95,7 @@
     border: none;
     background-color: $main-green;
     span {
+        border: 1px red solid;
         width: 9.55rem;
         height: 1.6rem;
         font-family: Nunito;

@@ -8,7 +8,7 @@ export const OurCustomers = () => (
     <div className="ourCustomers">
         <div className="content-container">
             <div className="ourCustmomers__content">
-                <p className="ourCustomers__content__phrase">Hunter is used by <b>10,000+ companies</b> and chosen by the smartest companies.</p>
+                <p className="ourCustomers__content__phrase">Reech.io is used by <b>10,000+ companies</b> and chosen by the smartest companies.</p>
                 <div className="ourCustomers__content__clients">
                     <img src="images/client1.png" alt="Google" />
                     <img src="images/client2.png" alt="IBM" />
